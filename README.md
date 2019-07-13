@@ -15,7 +15,7 @@ Cookie from `http://www.igmchicago.org/igm-economic-experts-panel`
 3. Navigate to the `network` tab
 4. As shown in the follow screenshot, select the `igm-economic-experts-panel` request, and copy the cookie string beginning with `incap_ses`
 
-<img src="https://github.com/cfhull/igm-panel-scraper/blob/master/cookie.png" width="400" />
+<img src="cookie.png" width="400" />
 
 
 ## Running
@@ -28,5 +28,5 @@ File will be saved to the current directory as `igmdata.json`
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
 
