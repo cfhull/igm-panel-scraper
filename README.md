@@ -2,6 +2,8 @@
 
 IGM Panel Scraper is a web scraper that pulls data from the IGM Economic Experts Panel at `http://www.igmchicago.org/igm-economic-experts-panel`
 
+Note: Currently does not support special surveys
+
 ## Prerequisites
 `node.js`
 
