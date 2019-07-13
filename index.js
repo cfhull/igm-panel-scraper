@@ -1,12 +1,14 @@
-const fetch = require('node-fetch')
 const axios = require('axios')
 const fs = require('fs')
 const jsdom = require('jsdom')
 const { JSDOM } = jsdom
 
 var url = 'http://www.igmchicago.org/igm-economic-experts-panel'
-
-const headers = {'Cookie': 'visid_incap_1371851=Cl91/oaUQJOMXVi5E80hIUvcJF0AAAAAQUIPAAAAAAARhoa1fWgA6WZgcwXB3Egm; incap_ses_143_1371851=gwU+BnJjKWBSkVcUJwz8AezMKV0AAAAAnk6Nf4gNtRPr7bop9V6isQ==;'}
+if (!process.argv[2]) {
+  console.log("Cookie is required. Example: 'node index.js <cookie>' ")
+  process.exit(1)
+}
+const headers = {'Cookie': process.argv[2]}
 
 const results = {
   errors: [],
@@ -16,7 +18,11 @@ const results = {
 ;(async () => {
 	const body = (await axios({url, headers})).data
 
-	if (body.includes('Incapsula')) throw 'Cookie has expired'
+	if (body.includes('Incapsula')) {
+	  console.log('Cookie has expired')
+    process.exit(1)
+	}
+
 	const window = new JSDOM(body).window
 
 	const urls =  [
@@ -32,9 +38,7 @@ const results = {
 	    fs.writeFile("igmdata.json", JSON.stringify(results, null, 2), err => err ? console.log(err) : console.log("The file was saved!"))
 	    return
 		}
-		console.log('start', i)
 		axios({ url: urls[i], headers}).then(body => {
-			console.log('done', i)
 			scrapeData(body.data, urls[i])
 			doRequest(urls, i+1)
 		})
@@ -49,7 +53,7 @@ const results = {
 	  if (window.document.querySelector('.post.post_domestic h2')) {
       topic = window.document.querySelector('.post.post_domestic h2').textContent
     } else {
-      console.log('skipped!')
+      console.log(url, '-- Failed!')
       results.errors.push({ url })
       return
     }
@@ -74,6 +78,7 @@ const results = {
 			  }))
 		  }))
 	  })
+		console.log(url, '-- Success!')
   }
 })()
 
