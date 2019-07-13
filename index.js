@@ -71,8 +71,8 @@ const results = {
 	  const questions = Array.from(window.document.querySelectorAll('h3.surveyQuestion')).map(x => x.textContent.replace(/Question \w:/g, '').trim())
 
 	  const responseTables = Array.from(window.document.querySelectorAll('table.responseDetail'))
-	  const participants = Array.from(responseTables[0].querySelectorAll('.response-name a')).map(x => x.textContent.trim())
 	  const responses = responseTables.map(table => ({
+	    participants: Array.from(table.querySelectorAll('.response-name a')).map(x => x.textContent.trim()),
 		  votes: Array.from(table.querySelectorAll('td span')).map(x => x.textContent.trim()),
 		  confidences: Array.from(table.querySelectorAll('.confCell')).map(x => x.textContent.trim()),
 	  }))
@@ -80,15 +80,15 @@ const results = {
 	  results.data.push({
 	    url,
 		  topic,
-		  questions,
-		  participants: participants.map((participant, i) => ({
-			  participant,
-			  responses: responses.map(response => ({
-				  vote: response.votes[i],
-				  confidence: response.confidences[i],
+		  questions: questions.map((question, i) => ({
+		    question,
+		    responses: responses[i].participants.map((participant, j) => ({
+			    participant,
+				  vote: responses[i].votes[j],
+				  confidence: responses[i].confidences[j],
 			  }))
 		  }))
-	  })
+		})
 	  return true
   }
 })()
