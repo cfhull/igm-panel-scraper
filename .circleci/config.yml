@@ -4,7 +4,7 @@
 #
 version: 2
 
-defaults:
+defaults: &defaults
     working_directory: ~/igm-panel-scraper
     docker:
       - image: circleci/node:latest
