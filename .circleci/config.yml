@@ -5,9 +5,9 @@
 version: 2
 
 defaults: &defaults
-    working_directory: ~/igm-panel-scraper
-    docker:
-      - image: circleci/node:latest
+  working_directory: ~/igm-panel-scraper
+  docker:
+    - image: circleci/node:latest
 
 jobs:
   test:
@@ -43,7 +43,7 @@ jobs:
       - store_artifacts:
           path: ~/reports 
 
-        - persist_to_workspace:
+      - persist_to_workspace:
           root: ~/igm-panel-scraper
           paths: .
 
