@@ -1,4 +1,4 @@
-# IGM Panel Web Scraper
+# IGM Panel Web Scraper ![GitHub](https://img.shields.io/github/license/cfhull/igm-panel-scraper.svg?style=plastic) ![CircleCI](https://img.shields.io/circleci/build/github/cfhull/igm-panel-scraper.svg?style=plastic) 
 
 IGM Panel Scraper is a web scraper that pulls data from the IGM Economic Experts Panel at `http://www.igmchicago.org/igm-economic-experts-panel`
 
