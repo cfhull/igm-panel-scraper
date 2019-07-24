@@ -37,8 +37,8 @@ jobs:
       - run: 
           command: |
             npm i tap-xunit
-            mkdir ~/reports
-            node -r @babel/register -r regenerator-runtime/runtime index.test.js | npx tap-xunit > ~/reports/test.xml 
+            mkdir ~/reports/tests
+            node -r @babel/register -r regenerator-runtime/runtime index.test.js | npx tap-xunit > ~/reports/test-results.xml 
           when: always
       - store_test_results:
           path: ~/reports
