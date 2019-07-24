@@ -3,19 +3,15 @@
 # Check https://circleci.com/docs/2.0/language-javascript/ for more details
 #
 version: 2
-jobs:
-  build:
+
+defaults:
+    working_directory: ~/igm-panel-scraper
     docker:
-      # specify the version you desire here
       - image: circleci/node:latest
 
-      # Specify service dependencies here if necessary
-      # CircleCI maintains a library of pre-built images
-      # documented at https://circleci.com/docs/2.0/circleci-images/
-      # - image: circleci/mongo:3.4.4
-
-    working_directory: ~/igm-panel-scraper
-
+jobs:
+  test:
+   <<: *defaults
     steps:
       - checkout
 
@@ -40,7 +36,42 @@ jobs:
             mkdir -p ~/reports/riteway
             node -r @babel/register -r regenerator-runtime/runtime index.test.js | npx tap-xunit > ~/reports/riteway/test-results.xml 
           when: always
+
       - store_test_results:
           path: ~/reports
+
       - store_artifacts:
           path: ~/reports 
+
+        - persist_to_workspace:
+          root: ~/igm-panel-scraper
+          paths: .
+
+  deploy:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: ~/igm-panel-scraper
+      - run:
+          name: Authenticate with registry
+          command: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > ~/igm-panel-scraper/.npmrc
+      - run:
+          name: Publish package
+          command: npm publish
+
+workflows:
+  version: 2
+  test-deploy:
+    jobs:
+      - test:
+          filters:
+            tags:
+              only: /^v.*/
+      - deploy:
+          requires:
+            - test
+          filters:
+            tags:
+              only: /^v.*/
+            branches:
+              ignore: /.*/
