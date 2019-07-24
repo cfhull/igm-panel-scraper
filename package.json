@@ -4,16 +4,22 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node -r @babel/register -r regenerator-runtime/runtime index.test.js | tap-nirvana"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "axios": "^0.19.0",
     "chalk": "^2.4.2",
-    "jsdom": "^15.1.1"
+    "jsdom": "^15.1.1",
+    "regenerator-runtime": "^0.13.3"
   },
   "devDependencies": {
-    "eslint-plugin-react": "^7.14.3"
+    "@babel/core": "^7.5.5",
+    "@babel/preset-env": "^7.5.5",
+    "@babel/register": "^7.5.5",
+    "eslint-plugin-env": "0.0.3",
+    "riteway": "^6.0.3",
+    "tap-nirvana": "^1.1.0"
   }
 }
