@@ -34,4 +34,13 @@ jobs:
           key: v1-dependencies-{{ checksum "package.json" }}
 
       # run tests!
-      - run: npm test
+      - run: 
+          command: |
+            npm i tap-xunit --dev
+            mkdir ~/reports
+            npm test -- | tap-xunit > ~/reports/tests.xml
+          when: always
+      - store_test_results:
+          path: ~/reports
+      - store_artifacts:
+          path: ~/reports 
