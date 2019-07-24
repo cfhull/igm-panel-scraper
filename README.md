@@ -1,7 +1,7 @@
-# IGM Panel Web Scraper [![GitHub](https://img.shields.io/github/license/cfhull/igm-panel-scraper.svg?style=plastic)](https://github.com/cfhull/igm-panel-scraper/blob/master/LICENSE) [![CircleCI](https://img.shields.io/circleci/build/github/cfhull/igm-panel-scraper.svg?style=plastic)](https://circleci.com/gh/cfhull/igm-panel-scraper) 
+# igm-scrape [![GitHub](https://img.shields.io/github/license/cfhull/igm-panel-scraper.svg?style=plastic)](https://github.com/cfhull/igm-panel-scraper/blob/master/LICENSE) [![CircleCI](https://img.shields.io/circleci/build/github/cfhull/igm-panel-scraper.svg?style=plastic)](https://circleci.com/gh/cfhull/igm-panel-scraper) 
 
 
-IGM Panel Scraper is a web scraper that pulls data from the IGM Economic Experts Panel at `http://www.igmchicago.org/igm-economic-experts-panel`
+igm-scrape is a web scraper that pulls data from the IGM Economic Experts Panel at `http://www.igmchicago.org/igm-economic-experts-panel`
 
 Note: Currently does not support special surveys
 
@@ -18,10 +18,17 @@ Cookie from `http://www.igmchicago.org/igm-economic-experts-panel`
 3. Navigate to the `network` tab
 4. As shown in the follow screenshot, select the `igm-economic-experts-panel` request, and copy the cookie string beginning with `incap_ses`
 
-<img src="cookie.png" width="400" />
+<img src="https://raw.githubusercontent.com/cfhull/igm-panel-scraper/master/cookie.png" width="400" />
 
 
 ## Running
+NPM
+```console
+$ npm i igm-scrape
+$ igm-scrape <cookie>
+```
+
+Manual
 ```console
 $ git clone <this repository>
 $ cd <cloned dir>
