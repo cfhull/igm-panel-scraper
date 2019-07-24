@@ -1,11 +1,13 @@
-import { getDomWindow, scrape } from './scrape.js'
+#!/usr/bin/env node
+
+const { getDomWindow, scrape } = require('./scrape.js')
 const fs = require('fs')
 const chalk = require('chalk')
 const success = chalk.green
 const error = chalk.red
 
 if (!process.argv[2]) {
-  console.log(error('Cookie is required. Example: \'node index.js <cookie>\' '))
+  console.log(error('Cookie is required. Example: \'igm-scrape <cookie>\' '))
   process.exit(1)
 }
 const cookie = process.argv[2]
@@ -27,7 +29,7 @@ const results = {
   data: [],
 }
 
-// Doing these sequentially because asyc is causes 500 errors for some reason
+// Doing these sequentially because async is causes 500 errors for some reason
 doRequest(urls, 0)
 
 function doRequest(urls, i) {

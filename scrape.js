@@ -3,7 +3,7 @@ const jsdom = require('jsdom')
 const { JSDOM } = jsdom
 const error = require('chalk').red
 
-export const getDomWindow = async (url, cookie) => {
+const getDomWindow = async (url, cookie) => {
   const body = (await axios({
     url,
     headers: { Cookie: cookie },
@@ -17,7 +17,7 @@ export const getDomWindow = async (url, cookie) => {
   return JSDOM(body).window
 }
 
-export const scrape = (body, url) => {
+const scrape = (body, url) => {
   const window = new JSDOM(body).window
 
   let topic
@@ -52,4 +52,9 @@ export const scrape = (body, url) => {
   }))
 
   return { success: true, data }
+}
+
+module.exports = {
+  getDomWindow,
+  scrape,
 }
