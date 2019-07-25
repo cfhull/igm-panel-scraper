@@ -35,9 +35,3 @@ $ cd <cloned dir>
 $ node index.js <cookie>
 ```
 File will be saved to the current directory as `igmdata.json`
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
-
-
